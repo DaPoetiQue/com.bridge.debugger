@@ -1,133 +1,121 @@
 namespace Bridge.Core.Debug
 {
-    public abstract class MonoDebug : UnityEngine.MonoBehaviour, ILogger
+    public static class DebugLogger
     {
-        #region Components
-
-        public LogData.LogChannel enabledLogChannel;
-
-        #endregion
-
         #region Debug
+
         /// <summary>
-        /// logs messages to the console on scene objects.
+        /// logs messages to the console.
         /// </summary>
         /// <param name="logLevel"></param>
+        /// <param name="logChannel"></param>
         /// <param name="logclass"></param>
         /// <param name="logMessage"></param>
-        public void Log(LogData.LogLevel logLevel, object logclass, object logMessage)
-         {
-            if(enabledLogChannel == LogData.LogChannel.None) return;
-
+        public static void Log(LogData.LogLevel logLevel, LogData.LogChannel logChannel, object logclass, object logMessage)
+        {
             string formattedMessage = $"<color=white>-->></color> {BeginLogColor(logLevel)}{logLevelTag(logLevel)}{EndLogColor()} : <color=white>{logMessage}.</color> {BeginLogColor(logLevel)} Invoked From {EndLogColor()} : <color=grey>{logclass}</color>";
 
-            if(logLevel == LogData.LogLevel.Success)
+            if (logLevel == LogData.LogLevel.Success)
             {
                 formattedMessage = $"<color=white>-->></color> {BeginLogColor(logLevel)}Success{EndLogColor()}{BeginLogColor(logLevel)}{logLevelTag(logLevel)}{EndLogColor()} : <color=white>{logMessage}.</color> {BeginLogColor(logLevel)} Invoked From {EndLogColor()} : <color=grey>{logclass}</color>";
             }
 
-            if(enabledLogChannel != LogData.LogChannel.All)
-            {
-                if(enabledLogChannel.ToString() != logLevel.ToString()) return;
-            }
-            
             switch (logLevel)
-             {
-                 case LogData.LogLevel.Debug:
+            {
+                case LogData.LogLevel.Debug:
 
                     UnityEngine.Debug.Log(formattedMessage);
 
-                 break;
+                    break;
 
                 case LogData.LogLevel.Error:
 
-                   UnityEngine.Debug.LogError(formattedMessage);
+                    UnityEngine.Debug.LogError(formattedMessage);
 
-                 break;
+                    break;
 
                 case LogData.LogLevel.Success:
 
-                   UnityEngine.Debug.Log(formattedMessage);
+                    UnityEngine.Debug.Log(formattedMessage);
 
-                 break;
+                    break;
 
                 case LogData.LogLevel.Warning:
 
-                  UnityEngine.Debug.LogWarning(formattedMessage);
+                    UnityEngine.Debug.LogWarning(formattedMessage);
 
-                 break;
+                    break;
 
-                 
-             }
 
-         }
+            }
+        }
 
         #endregion
 
         #region Data
 
-        private string BeginLogColor(LogData.LogLevel logLevel)
+        private static string BeginLogColor(LogData.LogLevel logLevel)
         {
-             string logColor = "";
+            string logColor = "";
 
             switch (logLevel)
             {
                 case LogData.LogLevel.Debug:
 
-                logColor = "<color=cyan>";
+                    logColor = "<color=cyan>";
 
-                break;
+                    break;
 
                 case LogData.LogLevel.Error:
 
-                 logColor = "<color=red>";
+                    logColor = "<color=red>";
 
-                break;
+                    break;
 
                 case LogData.LogLevel.Success:
 
-                 logColor = "<color=green>";
+                    logColor = "<color=green>";
 
-                break;
+                    break;
 
                 case LogData.LogLevel.Warning:
 
-                 logColor = "<color=orange>";
+                    logColor = "<color=orange>";
 
-                break;
+                    break;
             }
 
             return logColor;
         }
 
-        private string EndLogColor()
+        private static string EndLogColor()
         {
             return "</color>";
         }
 
-        private string logLevelTag(LogData.LogLevel logLevel)
+        private static string logLevelTag(LogData.LogLevel logLevel)
         {
-             string logLevelTag = "";
+            string logLevelTag = "";
 
             switch (logLevel)
             {
                 case LogData.LogLevel.Debug:
 
-                logLevelTag = "Info Logged";
+                    logLevelTag = "Info Logged";
 
-                break;
+                    break;
 
                 case LogData.LogLevel.Warning:
 
-                 logLevelTag = "Warning Logged";
+                    logLevelTag = "Warning Logged";
 
-                break;
+                    break;
 
                 case LogData.LogLevel.Error:
 
-                 logLevelTag = "Error Logged";
+                    logLevelTag = "Error Logged";
 
-                 break;
+                    break;
             }
 
             return logLevelTag;

@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace Bridge.Core.Debug
 {
     public class LogData
