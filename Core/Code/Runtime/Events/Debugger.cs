@@ -1,5 +1,4 @@
-// Namespace.
-namespace RedicalGamez.Dev.ToolKit
+namespace Bridge.Core.Debug
 {
     public class Debugger
     {
