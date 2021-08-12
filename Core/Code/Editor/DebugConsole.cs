@@ -1,4 +1,6 @@
-namespace Bridge.Core.Debug
+using Bridge.Core.Debug;
+
+namespace Bridge.Core.UnityEditor.Debug
 {
     /// <summary>
     /// This static class manages logging debug messages to the unity console.

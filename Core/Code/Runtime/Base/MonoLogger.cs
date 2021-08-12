@@ -13,17 +13,17 @@ namespace Bridge.Core.Debug
         /// logs messages to the console on scene objects.
         /// </summary>
         /// <param name="logLevel"></param>
-        /// <param name="logclass"></param>
+        /// <param name="logClass"></param>
         /// <param name="logMessage"></param>
-        public void Log(LogLevel logLevel, object logclass, object logMessage)
+        public void Log(LogLevel logLevel, object logClass, object logMessage)
          {
             if(enabledLogChannel == LogChannel.None) return;
 
-            string formattedMessage = $"<color=white>-->></color> {DebugFormat.BeginLogColor(logLevel)}{DebugFormat.logLevelTag(logLevel)}{DebugFormat.EndLogColor()} : <color=white>{logMessage}.</color> {DebugFormat.BeginLogColor(logLevel)} Invoked From {DebugFormat.EndLogColor()} : <color=grey>{logclass}</color>";
+            string formattedMessage = $"<color=white>-->></color> {DebugFormat.BeginLogColor(logLevel)}{DebugFormat.logLevelTag(logLevel)}{DebugFormat.EndLogColor()} : <color=white>{logMessage}.</color> {DebugFormat.BeginLogColor(logLevel)} Invoked From {DebugFormat.EndLogColor()} : <color=grey>{logClass}</color>";
 
             if(logLevel == LogLevel.Success)
             {
-                formattedMessage = $"<color=white>-->></color> {DebugFormat.BeginLogColor(logLevel)}Success{DebugFormat.EndLogColor()}{DebugFormat.BeginLogColor(logLevel)}{DebugFormat.logLevelTag(logLevel)}{DebugFormat.EndLogColor()} : <color=white>{logMessage}.</color> {DebugFormat.BeginLogColor(logLevel)} Invoked From {DebugFormat.EndLogColor()} : <color=grey>{logclass}</color>";
+                formattedMessage = $"<color=white>-->></color> {DebugFormat.BeginLogColor(logLevel)}Success{DebugFormat.EndLogColor()}{DebugFormat.BeginLogColor(logLevel)}{DebugFormat.logLevelTag(logLevel)}{DebugFormat.EndLogColor()} : <color=white>{logMessage}.</color> {DebugFormat.BeginLogColor(logLevel)} Invoked From {DebugFormat.EndLogColor()} : <color=grey>{logClass}</color>";
             }
 
             if(enabledLogChannel != LogChannel.All)
@@ -35,13 +35,17 @@ namespace Bridge.Core.Debug
              {
                  case LogLevel.Debug:
 
+                    Debugger.Log(DebugData.LogType.LogInfo, logClass, formattedMessage);
+
                     UnityEngine.Debug.Log(formattedMessage);
 
                  break;
 
                 case LogLevel.Error:
 
-                   UnityEngine.Debug.LogError(formattedMessage);
+                    Debugger.Log(DebugData.LogType.LogError, logClass, formattedMessage);
+
+                    UnityEngine.Debug.LogError(formattedMessage);
 
                  break;
 
@@ -53,7 +57,9 @@ namespace Bridge.Core.Debug
 
                 case LogLevel.Warning:
 
-                  UnityEngine.Debug.LogWarning(formattedMessage);
+                    Debugger.Log(DebugData.LogType.LogWarning, logClass, formattedMessage);
+
+                    UnityEngine.Debug.LogWarning(formattedMessage);
 
                  break;
              }
