@@ -11,7 +11,7 @@ namespace Bridge.Core.UnityEditor.Debug
         [MenuItem("3ridge/Create/Runtime Debugger")]
         private static void CreateRuntimeDebugConsole()
         {
-            GameObject debugWindow = new GameObject("Runtime Debug Console");
+            GameObject debugWindow = new GameObject("_3ridge Runtime Debug Console");
             debugWindow.AddComponent<RuntimeDebugger>();
         }
 
