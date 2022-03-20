@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEditor;
 using Bridge.Core.Debug;
 
-namespace Bridge.Core.UnityEditor.Debugger
+namespace Bridge.Core.UnityCustomEditor.Debugger
 {
     public class RuntimeDebugConsoleEditor : Editor
     {

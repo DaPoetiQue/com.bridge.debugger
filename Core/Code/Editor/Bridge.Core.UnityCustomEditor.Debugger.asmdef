@@ -1,6 +1,6 @@
 {
-    "name": "Bridge.Core.UnityEditor.Debugger",
-    "rootNamespace": "Bridge.Core.UnityEditor.Debugger",
+    "name": "Bridge.Core.UnityCustomEditor.Debugger",
+    "rootNamespace": "Bridge.Core.UnityCustomEditor.Debugger",
     "references": [
         "GUID:5ef81270e65190e4babbe8d8e6e466c5"
     ],
